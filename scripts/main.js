@@ -5,6 +5,8 @@ var input = [0,0,0,0,0,0,0,0];
 
 var txt = "";
 
+var empty = true;
+
 check = b.pin(7, 'digital', 'input');
 
 u1 = b.pin(5, 'digital', 'input');
@@ -131,7 +133,43 @@ function binToString(arr){
 $("#page-content textarea").on('change keyup', function(event) {
   event.preventDefault();
   makeQRCode($(this).val());
+  empty = false;
+
+  timeout.reset(600000);
 });
+
+var timeout = new Timer(function(){
+    if(!empty){
+      window.location.reload();
+    }
+  }, 600000);
+
+function Timer(fn, t) {
+    var timerObj = setInterval(fn, t);
+
+    this.stop = function() {
+        if (timerObj) {
+            clearInterval(timerObj);
+            timerObj = null;
+        }
+        return this;
+    };
+
+    // start timer using current settings (if it's not already running)
+    this.start = function() {
+        if (!timerObj) {
+            this.stop();
+            timerObj = setInterval(fn, t);
+        }
+        return this;
+    };
+
+    // start with new interval, stop current interval
+    this.reset = function(newT) {
+        t = newT;
+        return this.stop().start();
+    };
+}
 
 function makeQRCode(txt){
   var head = "Typed with the Brilliant(-ly useless) 8-bit Keyboard\n";
