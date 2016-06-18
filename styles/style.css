@@ -1,0 +1,72 @@
+/* default settings (layout only, NOT for typographic details) */
+a:link {
+  text-decoration: none;
+  color: #fff;
+}
+a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+body {
+  background-color: #ababab;
+}
+/* default typography presets */
+html{
+  font-family: "Gill Sans", sans-serif;
+}
+
+h1 {
+  font-family: "Gill Sans", "Helvetica", sans-serif;
+  font-size: 4em;
+}
+h2 {
+  font-family: Georgia,serif;
+  font-size: 3em;
+}
+h3 {
+  font-size: 2em;
+}
+h4 {
+  font-size: 1.5em;
+}
+h5 {
+  font-size: 1em;
+}
+h6 {
+  font-size: 0.5em;
+}
+p{
+  font-size: 1.3em;
+}
+
+/* custom modifications */
+body{
+  overflow: hidden;
+  cursor: none;
+}
+
+#page-content{
+  width: 70%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#page-content h1{
+  width: 100%;
+  text-align: center;
+}
+
+#page-content #insert{
+  word-wrap: break-word;
+  min-height: 100px;
+  width: 100%;
+}
+
+#page-content textarea{
+  height: 60vh;
+  font-size: 1.75em;
+  cursor: none;
+}
+
+
