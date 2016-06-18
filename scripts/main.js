@@ -26,7 +26,8 @@ check.read(function(val){
     console.log(input);
   }
 
-  $("#page-content #insert textarea").val(txt);  
+  $("#page-content #insert textarea").val(txt);
+  makeQRCode($("#page-content #insert textarea").val());
 });
 
 u1.read(function(val){
@@ -122,4 +123,18 @@ function binToString(arr){
   temp.string = String.fromCharCode(temp.num);
 
   return temp;
+}
+
+
+
+//QR code
+$("#page-content textarea").on('change keyup', function(event) {
+  event.preventDefault();
+  makeQRCode($(this).val());
+});
+
+function makeQRCode(txt){
+  var head = "Typed with the Brilliant(-ly useless) 8-bit Keyboard\n";
+  txt = head + txt;
+  $("#qrcode").qrcode({width: 200, height: 200, text: txt});
 }

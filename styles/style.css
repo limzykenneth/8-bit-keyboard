@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Inconsolata;
+    src: url(inconsolata.otf);
+}
+
 /* default settings (layout only, NOT for typographic details) */
 a:link {
   text-decoration: none;
@@ -12,11 +17,11 @@ body {
 }
 /* default typography presets */
 html{
-  font-family: "Gill Sans", sans-serif;
+  font-family: "Inconsolata", sans-serif;
 }
 
 h1 {
-  font-family: "Gill Sans", "Helvetica", sans-serif;
+  font-family: "Inconsolata", "Helvetica", sans-serif;
   font-size: 4em;
 }
 h2 {
@@ -40,21 +45,30 @@ p{
 }
 
 /* custom modifications */
+html{
+  cursor: none;
+}
+
 body{
   overflow: hidden;
   cursor: none;
 }
 
 #page-content{
+  float: left;
   width: 70%;
   max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 30px;
+  padding-right: 25px;
+  border-right: solid 1px black;
+  height: 100vh;
 }
 
-#page-content h1{
+h1{
   width: 100%;
   text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 #page-content #insert{
@@ -67,6 +81,29 @@ body{
   height: 60vh;
   font-size: 1.75em;
   cursor: none;
+  font-family: sans-serif;
 }
 
+#instruction{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  margin: 38px;
+  margin-top: 20px;
+  font-size: 1em;
+}
+
+#qrcode{
+  position: fixed;
+  height: 200px;
+  width: 200px;
+  background-color: white;
+  bottom: 0px;
+  right: 0px;
+  padding: 25px;
+  margin: 10px;
+  margin-right: 38px;
+  cursor: none;
+}
 
