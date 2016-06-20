@@ -107,3 +107,15 @@ h1{
   cursor: none;
 }
 
+#feedback{
+  position: fixed;
+  height: 200px;
+  width: 200px;
+  bottom: 160px;
+  right: 0px;
+  padding: 0px;
+  margin-bottom: 35px;
+  margin-right: 88px;
+  cursor: none;
+}
+

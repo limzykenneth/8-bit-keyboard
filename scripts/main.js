@@ -21,95 +21,95 @@ u128 = b.pin(4, 'digital', 'input');
 $("#page-content textarea").focus();
 
 check.read(function(val){
-  if(val == 1){
-    var charCode = binToString(input).num;
-    var char = binToString(input).string;
-    txt += char;
-    console.log(input);
-  }
+	if(val == 1){
+		var charCode = binToString(input).num;
+		var char = binToString(input).string;
+		txt += char;
+		console.log(input);
+	}
 
-  $("#page-content #insert textarea").val(txt);
-  makeQRCode($("#page-content #insert textarea").val());
+	$("#page-content #insert textarea").val(txt);
+	makeQRCode($("#page-content #insert textarea").val());
 });
 
 u1.read(function(val){
-  if(val == 1){
-    input[0] = 1;
-    console.log("u1", val);
-  }else if (val == 0){
-    input[0] = 0;
-  }
-  // console.log("u1", val);
+	if(val == 1){
+		input[7] = 1;
+		console.log("u1", val);
+	}else if (val == 0){
+		input[7] = 0;
+	}
+	// console.log("u1", val);
 });
 
 u2.read(function(val){
-  if(val == 1){
-    input[1] = 1;
-    console.log("u2", val);
-  }else if (val == 0){
-    input[1] = 0;
-  }
-  // console.log("u2", val);
+	if(val == 1){
+		input[6] = 1;
+		console.log("u2", val);
+	}else if (val == 0){
+		input[6] = 0;
+	}
+	// console.log("u2", val);
 });
 
 u4.read(function(val){
-  if(val == 1){
-    input[2] = 1;
-    console.log("u4", val);
-  }else if (val == 0){
-    input[2] = 0;
-  }
-  // console.log("u4", val);
+	if(val == 1){
+		input[5] = 1;
+		console.log("u4", val);
+	}else if (val == 0){
+		input[5] = 0;
+	}
+	// console.log("u4", val);
 });
 
 u8.read(function(val){
-  if(val == 1){
-    input[3] = 1;
-    console.log("u8", val);
-  }else if (val == 0){
-    input[3] = 0;
-  }
-  // console.log("u8", val);
+	if(val == 1){
+		input[4] = 1;
+		console.log("u8", val);
+	}else if (val == 0){
+		input[4] = 0;
+	}
+	// console.log("u8", val);
 });
 
 u16.read(function(val){
-  if(val == 1){
-    input[4] = 1;
-    console.log("u16", val);
-  }else if (val == 0){
-    input[4] = 0;
-  }
-  // console.log("u16", val);
+	if(val == 1){
+		input[3] = 1;
+		console.log("u16", val);
+	}else if (val == 0){
+		input[3] = 0;
+	}
+	// console.log("u16", val);
 });
 
 u32.read(function(val){
-  if(val == 1){
-    input[5] = 1;
-    console.log("u32", val);
-  }else if (val == 0){
-    input[5] = 0;
-  }
-  // console.log("u32", val);
+	if(val == 1){
+		input[2] = 1;
+		console.log("u32", val);
+	}else if (val == 0){
+		input[2] = 0;
+	}
+	// console.log("u32", val);
 });
 
 u64.read(function(val){
-  if(val == 1){
-    input[6] = 1;
-    console.log("u64", val);
-  }else if (val == 0){
-    input[6] = 0;
-  }
-  // console.log("u64", val);
+	if(val == 1){
+		input[1] = 1;
+		console.log("u64", val);
+	}else if (val == 0){
+		input[1] = 0;
+	}
+	// console.log("u64", val);
 });
 
 u128.read(function(val){
-  if(val == 1){
-    input[7] = 1;
-    console.log("u128", val);
-  }else if (val == 0){
-    input[7] = 0;
-  }
-  // console.log("u128", val);
+	if(val == 1){
+		input[0] = 1;
+		console.log("u128", val);
+	}else if (val == 0){
+		input[0] = 0;
+	}
+	// console.log("u128", val);
 });
 
 
@@ -117,62 +117,163 @@ u128.read(function(val){
 // binary string passed in from the "keyboard".
 // Returns a character from "a-z".
 function binToString(arr){
-  var bin = arr.join("");
-  var temp = {};
-  
-  temp.num = parseInt(bin, 2);
+	var bin = arr.join("");
+	var temp = {};
+	
+	temp.num = parseInt(bin, 2);
 
-  temp.string = String.fromCharCode(temp.num);
+	temp.string = String.fromCharCode(temp.num);
 
-  return temp;
+	return temp;
 }
 
 
 
 //QR code
 $("#page-content textarea").on('change keyup', function(event) {
-  event.preventDefault();
-  makeQRCode($(this).val());
-  empty = false;
+	event.preventDefault();
+	makeQRCode($(this).val());
+	empty = false;
 
-  timeout.reset(600000);
+	timeout.reset(600000);
 });
 
 var timeout = new Timer(function(){
-    if(!empty){
-      window.location.reload();
-    }
-  }, 600000);
+		if(!empty){
+			window.location.reload();
+		}
+	}, 600000);
 
 function Timer(fn, t) {
-    var timerObj = setInterval(fn, t);
+		var timerObj = setInterval(fn, t);
 
-    this.stop = function() {
-        if (timerObj) {
-            clearInterval(timerObj);
-            timerObj = null;
-        }
-        return this;
-    };
+		this.stop = function() {
+				if (timerObj) {
+						clearInterval(timerObj);
+						timerObj = null;
+				}
+				return this;
+		};
 
-    // start timer using current settings (if it's not already running)
-    this.start = function() {
-        if (!timerObj) {
-            this.stop();
-            timerObj = setInterval(fn, t);
-        }
-        return this;
-    };
+		// start timer using current settings (if it's not already running)
+		this.start = function() {
+				if (!timerObj) {
+						this.stop();
+						timerObj = setInterval(fn, t);
+				}
+				return this;
+		};
 
-    // start with new interval, stop current interval
-    this.reset = function(newT) {
-        t = newT;
-        return this.stop().start();
-    };
+		// start with new interval, stop current interval
+		this.reset = function(newT) {
+				t = newT;
+				return this.stop().start();
+		};
 }
 
 function makeQRCode(txt){
-  var head = "Typed with the Brilliant(-ly useless) 8-bit Keyboard\n";
-  txt = head + txt;
-  $("#qrcode").qrcode({width: 200, height: 200, text: txt});
+	var head = "Typed with the Brilliant(-ly useless) 8-bit Keyboard\n";
+	txt = head + txt;
+	$("#qrcode").qrcode({width: 200, height: 200, text: txt});
 }
+
+var feedback = function(p){
+	p.setup = function(){
+		p.createCanvas(250,120);
+		p.background(255);
+	};
+
+	p.draw = function(){
+		p.noStroke();
+
+		p.push();
+		for (var x=1; x<=8; x++){
+			var y = x;
+			if (x > 4){
+				switch (y){
+					case 5:
+						y = 4;
+						break;
+					case 6:
+						y = 3;
+						break;
+					case 7:
+						y = 2;
+						break;
+					case 8:
+						y = 1;
+						break;
+				}
+			}
+
+			switch (x){
+				case 1:
+					if (input[0] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+				case 2:
+					if (input[1] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+				case 3:
+					if (input[2] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+				case 4:
+					if (input[3] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+				case 5:
+					if (input[4] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+				case 6:
+					if (input[5] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+				case 7:
+					if (input[6] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+				case 8:
+					if (input[7] == 1){
+						p.fill(255,0,0);
+					}else{
+						p.fill(0,0,255);
+					}
+					break;
+			}
+			
+			p.rect(20*x, 20*y, 20, 20);
+			p.translate(7,0);
+		}
+		p.pop();
+
+		p.textSize(32);
+		p.fill(0);
+		p.text(binToString(input).string, p.width/2-10, p.height/2-20);
+	};
+};
+
+new p5(feedback, document.getElementById("feedback"));
