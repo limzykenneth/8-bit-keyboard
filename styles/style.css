@@ -56,8 +56,8 @@ body{
 
 #page-content{
   float: left;
-  width: 70%;
-  max-width: 900px;
+  width: 78%;
+  /* max-width: 1200px; */
   margin-left: 30px;
   padding-right: 25px;
   border-right: solid 1px black;
@@ -77,11 +77,15 @@ h1{
   width: 100%;
 }
 
+#page-content .instruction{
+  margin-left:300px;
+}
 #page-content textarea{
   height: 60vh;
   font-size: 1.75em;
   cursor: none;
   font-family: sans-serif;
+  margin-left: 300px;
 }
 
 #instruction{

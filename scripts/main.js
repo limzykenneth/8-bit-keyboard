@@ -1,4 +1,4 @@
-var b = p5.board('/dev/cu.usbmodem1a21', 'arduino');
+var b = p5.board('/dev/ttyACM0', 'arduino');
 var u1, u2, u4, u8, u16, u32, u64, u128, check;
 
 var input = [0,0,0,0,0,0,0,0];
@@ -7,7 +7,7 @@ var txt = "";
 
 var empty = true;
 
-check = b.pin(7, 'digital', 'input');
+// check = b.pin(7, 'digital', 'input');
 
 u1 = b.pin(5, 'digital', 'input');
 u2 = b.pin(3, 'digital', 'input');
@@ -20,17 +20,30 @@ u128 = b.pin(4, 'digital', 'input');
 
 $("#page-content textarea").focus();
 
-check.read(function(val){
-	if(val == 1){
+
+setInterval(function(){
+	if (!input.equals([0, 0, 0, 0, 0, 0, 0, 0]) && binToString(input).string !== ""){
 		var charCode = binToString(input).num;
 		var char = binToString(input).string;
 		txt += char;
 		console.log(input);
-	}
 
-	$("#page-content #insert textarea").val(txt);
-	makeQRCode($("#page-content #insert textarea").val());
-});
+		$("#page-content #insert textarea").val(txt);
+		makeQRCode($("#page-content #insert textarea").val());
+	}
+}, 1500);
+
+// check.read(function(val){
+// 	if(val == 1){
+// 		var charCode = binToString(input).num;
+// 		var char = binToString(input).string;
+// 		txt += char;
+// 		console.log(input);
+// 	}
+
+// 	$("#page-content #insert textarea").val(txt);
+// 	makeQRCode($("#page-content #insert textarea").val());
+// });
 
 u1.read(function(val){
 	if(val == 1){
@@ -132,48 +145,13 @@ function binToString(arr){
 //QR code
 $("#page-content textarea").on('change keyup', function(event) {
 	event.preventDefault();
-	makeQRCode($(this).val());
-	empty = false;
-
-	timeout.reset(600000);
+	// makeQRCode($(this).val());
 });
-
-var timeout = new Timer(function(){
-		if(!empty){
-			window.location.reload();
-		}
-	}, 600000);
-
-function Timer(fn, t) {
-		var timerObj = setInterval(fn, t);
-
-		this.stop = function() {
-				if (timerObj) {
-						clearInterval(timerObj);
-						timerObj = null;
-				}
-				return this;
-		};
-
-		// start timer using current settings (if it's not already running)
-		this.start = function() {
-				if (!timerObj) {
-						this.stop();
-						timerObj = setInterval(fn, t);
-				}
-				return this;
-		};
-
-		// start with new interval, stop current interval
-		this.reset = function(newT) {
-				t = newT;
-				return this.stop().start();
-		};
-}
 
 function makeQRCode(txt){
 	var head = "Typed with the Brilliant(-ly useless) 8-bit Keyboard\n";
 	txt = head + txt;
+	console.log(txt);
 	$("#qrcode").qrcode({width: 200, height: 200, text: txt});
 }
 
@@ -184,6 +162,7 @@ var feedback = function(p){
 	};
 
 	p.draw = function(){
+		p.background(255);
 		p.noStroke();
 
 		p.push();
@@ -277,3 +256,31 @@ var feedback = function(p){
 };
 
 new p5(feedback, document.getElementById("feedback"));
+
+
+
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+};
+// Hide method from for-in loops
+Object.defineProperty(Array.prototype, "equals", {enumerable: false});
